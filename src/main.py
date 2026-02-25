@@ -1,5 +1,5 @@
-from src.core.menu import menu
-import src.database.db as db
+from core.menu import menu
+from database import db
 
 def main():
   db.init()

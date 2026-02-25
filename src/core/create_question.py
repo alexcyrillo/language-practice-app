@@ -1,4 +1,4 @@
-from src.database import db
+from database import db
 
 def create_question():
   question = input("Qual a pergunta?\n")

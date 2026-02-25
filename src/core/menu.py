@@ -1,3 +1,6 @@
+from core.review import review
+from core.create_question import create_question
+
 def menu():
     print("\n--- APP DE REVISÃO DE IDIOMAS ---")
     print("1. Estudar (Revisão)")
