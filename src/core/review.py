@@ -1,4 +1,4 @@
-from src.database import db
+from database import db
 
 def compare_answer(question, answer):
   if(question == answer):
@@ -7,14 +7,19 @@ def compare_answer(question, answer):
     return False
 
 def review():
-  result = db.get_question(1)
+  # falta tratamenro de erro 
+  review_qt = int(input("Quantas palavras deseja revisar? (0 - Para revisar tudo)\n"))
 
-  question = result[1]
-  correct_answer = result[2]
+  result = db.list_aleatory_questions(review_qt)
 
-  user_answer = input(f"{question}\n")
+  for el in result:
+    question = el[0]
+    correct_answer = el[1]
+    print("---------------------------")
+    user_answer = input(f"{question}\n")
 
-  if(compare_answer(correct_answer, user_answer)):
-    print("Correto")
-  else:
-    print(f" Incorreto\n Correto: {correct_answer}\n Sua resposta: {user_answer}")
+    if(compare_answer(correct_answer, user_answer)):
+      print("Correto")
+    else:
+      print(f" Incorreto\n Correto: {correct_answer}\n Sua resposta: {user_answer}")
+    print("---------------------------")
