@@ -65,7 +65,7 @@ def delete_deck(deck_name):
   sql = f'''DROP TABLE IF EXISTS "{deck_name}"'''
   command(sql)
 
-  sql = f'''DELETE FROM decks WHERE name = {deck_name}'''
+  sql = f'''DELETE FROM decks WHERE name = "{deck_name}"'''
   command(sql)
 
 def create_question(question, answer, deck):
