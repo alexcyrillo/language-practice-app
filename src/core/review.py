@@ -3,7 +3,6 @@ from core.select_from_list import select_from_list
 import re
 
 def review(deck_name):
-  decks = db.list_decks()
   correct_count = 0
   incorrect_count = 0
 
@@ -30,8 +29,8 @@ def review(deck_name):
       incorrect_count += 1
     print("---------------------------")
   
-    keep = input("Pressione qualquer botao para continuar; q para sair")
-    if(keep == "q"):
+    keepPracticing = input("Pressione ENTER para continuar; q para sair")
+    if(keepPracticing == "q"):
       break
 
   print(f"\n-----Pontuação Final-----\nCorretas: {correct_count}\nIncorretas: {incorrect_count}\n-------------------------")
