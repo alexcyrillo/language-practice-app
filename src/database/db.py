@@ -32,6 +32,15 @@ def command(sql_command, values = None):
     result = cursor.fetchall()
     connection.commit()
     return result
+  except sqlite3.IntegrityError as e:
+        # Verifica se a palavra 'UNIQUE' ou 'PRIMARY KEY' está na mensagem de erro
+        if "UNIQUE" in str(e).upper() or "PRIMARY KEY" in str(e).upper():
+            print("Erro: O dado já está presente no banco de dados (duplicidade).")
+        else:
+            print(f"Erro de integridade: {e}")
+            
+  except sqlite3.Error as e:
+        print(f"Erro no SQLite: {e}")
   except:
     print("Erro ao Conectar Banco de Dados")
   finally:
@@ -52,8 +61,20 @@ def list_decks():
   result = command(sql)
   return result
 
+def delete_deck(deck_name):
+  sql = f'''DROP TABLE IF EXISTS "{deck_name}"'''
+  command(sql)
+
+  sql = f'''DELETE FROM decks WHERE name = {deck_name}'''
+  command(sql)
+
 def create_question(question, answer, deck):
   sql = f'''INSERT INTO "{deck}" (question, answer) VALUES (?, ?);'''
+  values = (question, answer)
+  command(sql, values)
+
+def update_or_create_question(question, answer, deck):
+  sql = f'''INSERT INTO "{deck}" (question, answer) VALUES (?, ?) ON CONFLICT (question) DO UPDATE SET answer = excluded.answer;'''
   values = (question, answer)
   command(sql, values)
 
