@@ -7,7 +7,7 @@ def check_connection():
     requests.get(url)
     return True
   except:
-    return False
+    print("Garanta que o Anki esta aberto e com o addon AnkiConnect instalado")
 
 def anki_request(payload):
   if(check_connection()):
