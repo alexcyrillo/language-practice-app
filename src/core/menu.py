@@ -1,6 +1,6 @@
 from core.review import review
-from core.create_question import create_question
-from core.anki_import import import_from_anki
+from core.decks_functions import deck_selection, delete_deck
+from core.anki_import import import_from_anki, update_deck_with_ankis
 from core.select_from_list import select_from_list
 from database import db
 
@@ -23,8 +23,7 @@ def main_menu(selected_deck = None):
     case 2:
       anki_import_menu(selected_deck)
     case 3:
-      selected_deck = None
-      main_menu(selected_deck)
+      main_menu()
     case 4:
       exit()
     case _:
@@ -46,7 +45,7 @@ def deck_menu(selected_deck):
     case 2:
       deck_menu()
     case 3:
-      print ("Implementar")
+      delete_deck(selected_deck)
     case 4:
       main_menu()
     case _:
@@ -64,17 +63,8 @@ def anki_import_menu(selected_deck):
     case 0:
       import_from_anki()
     case 1:
-      print ("Implementar")
+      update_deck_with_ankis()
     case 2:
       main_menu()
     case _:
       print ("Opcao Invalida")
-
-
-def deck_selection():
-  decks_list = db.list_decks()
-  print("\n---SELECAO DE DECK---")
-  deck_index = select_from_list(decks_list, "Selecione um Deck")
-  print("--------------------")
-
-  return decks_list[deck_index][1]
