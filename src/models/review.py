@@ -1,5 +1,5 @@
-from database import db
-from core.select_from_list import select_from_list
+from services import db
+from select_from_list import select_from_list
 import re
 
 def review(deck_name):

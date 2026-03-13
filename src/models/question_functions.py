@@ -1,4 +1,4 @@
-from database import db
+from services import db
 
 def create_question():
   question = input("Qual a pergunta?\n")
